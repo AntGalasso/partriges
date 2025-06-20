@@ -1,0 +1,14 @@
+def coinChange(coins, V):
+    dp = [float('inf')] * (V + 1)
+    dp[0] = 0
+
+    for i in range(1, V + 1):
+        for coin in coins:
+            if i - coin >= 0:
+                dp[i] = min(dp[i], dp[i - coin] + 1)
+
+    return dp[V] if dp[V] != float('inf') else -1
+
+coins = [1, 2, 5]
+amount = 11
+print(coinChange(coins, amount))  # Output: 3 (5+5+1)
